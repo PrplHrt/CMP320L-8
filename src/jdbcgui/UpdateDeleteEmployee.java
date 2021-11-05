@@ -420,7 +420,7 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
         // TODO add your handling code here:
         MovePrevious();
     }//GEN-LAST:event_btnPreviousActionPerformed
-
+    // Eyad - Need to change this to add a CONFIRM message dialogue; similar to btnUpdateActionPerformed() could just add a confrim function
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
 
@@ -544,7 +544,7 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
 
         return result;
     }
-
+    // Eyad - Need to change this to add a CONFIRM message dialogue; similar to btnDeleteActionPerformed() could just add a confrim function
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
 

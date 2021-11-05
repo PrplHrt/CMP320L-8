@@ -45,10 +45,11 @@ public class LoginForm extends javax.swing.JFrame {
             // make the result set scrolable forward/backward updatable
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             // populate valid mgr numbers 
+            // Eyad - need to change this line and jButton1ActionPerformed() to match Lab 7 requirements
             rs = statement.executeQuery("SELECT username, password, type FROM loginusers ORDER BY username ");
 
         } catch (ClassNotFoundException | SQLException e) {
-            javax.swing.JLabel label = new javax.swing.JLabel("SQL Erro - Retreiving usename/password.");
+            javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Retreiving usename/password.");
             label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
