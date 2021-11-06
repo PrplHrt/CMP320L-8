@@ -22,8 +22,8 @@ import javax.swing.JOptionPane;
 public class UpdateDeleteEmployee extends javax.swing.JFrame {
 
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "USERNAME";
-    String DBPASS = "PASSWORD";
+    String DBUSER = "b00081542";
+    String DBPASS = "b00081542";
 
     Connection con;
     Statement statement;
@@ -420,6 +420,8 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
         // TODO add your handling code here:
         MovePrevious();
     }//GEN-LAST:event_btnPreviousActionPerformed
+    
+
     // Eyad - Need to change this to add a CONFIRM message dialogue; similar to btnUpdateActionPerformed() could just add a confrim function
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
@@ -427,14 +429,17 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
         try {
             // make the result set scrolable forward/backward updatable
             prepStatement = con.prepareStatement("DELETE emp WHERE empno = " + txtEmpno.getText().trim());
-            int result = prepStatement.executeUpdate();
-            if (result > 0) {
-                javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtEmpno.getText().trim() + " deleted successfully.");
-                label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
-                JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-                getNewData();
+            // Using JOptionPane Confirm Dialog to confirm the action
+            int confirmAction = JOptionPane.showConfirmDialog(this,String.format("Confirm delete of empno: %s?", txtEmpno.getText().trim()));
+            if (confirmAction == JOptionPane.YES_OPTION){
+                int result = prepStatement.executeUpdate();
+                if (result > 0) {
+                    javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtEmpno.getText().trim() + " deleted successfully.");
+                    label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
+                    JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                    getNewData();
+                }
             }
-
             prepStatement.close();
 
         } catch (SQLException e) {
@@ -563,18 +568,23 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
                 prepStatement.setInt(6, Integer.parseInt(txtComm.getText()));
                 prepStatement.setInt(7, Integer.parseInt(cmbDeptno.getSelectedItem().toString()));
                 prepStatement.setInt(8, Integer.parseInt(txtEmpno.getText().trim()));
-                int result = prepStatement.executeUpdate();
-                if (result > 0) {
+                // Using JOptionPane Confirm Dialog to confirm the action
+                int confirmAction = JOptionPane.showConfirmDialog(this,"Confirm update?");
+                if (confirmAction == JOptionPane.YES_OPTION){
+                    int result = prepStatement.executeUpdate();
+                    if (result > 0) {
 
-                    javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtEmpno.getText() + " updated successfully.");
-                    label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
-                    JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                        javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtEmpno.getText() + " updated successfully.");
+                        label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
+                        JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 
-                    getNewData();
+                        getNewData();
 
-                } else {
-                    // check validation errors 
+                    } else {
+                        // check validation errors 
+                    }
                 }
+                
                 prepStatement.close();
             } else {
 

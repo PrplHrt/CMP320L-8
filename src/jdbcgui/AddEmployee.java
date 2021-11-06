@@ -26,8 +26,8 @@ public class AddEmployee extends javax.swing.JFrame {
      * Creates new form AddEmployee
      */
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "USERNAME";
-    String DBPASS = "PASSWORD";
+    String DBUSER = "b00081542";
+    String DBPASS = "b00081542";
 
     Connection con;
     Statement statement;
