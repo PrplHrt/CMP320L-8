@@ -31,6 +31,56 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
     PreparedStatement prepStatement;
     ResultSet rs;
     ResultSet rsdeptno;
+    
+    // Custom function to convert dates retrieved from SQL to acceptable input format
+    public static String dateF(String date){
+        if(date != null && !date.trim().isEmpty()){
+            String[] parts = ((date.split(" "))[0]).split("-");
+            String month = "";
+            switch(parts[1]){
+                case "01":
+                    month = "jan";
+                    break;
+                case "02":
+                    month = "feb";
+                    break;
+                case "03":
+                    month = "mar";
+                    break;
+                case "04":
+                    month = "apr";
+                    break;
+                case "05":
+                    month = "may";
+                    break;
+                case "06":
+                    month = "jun";
+                    break;
+                case "07":
+                    month = "jul";
+                    break;
+                case "08":
+                    month = "aug";
+                    break;
+                case "09":
+                    month = "sep";
+                    break;
+                case "10":
+                    month = "oct";
+                    break;
+                case "11":
+                    month = "nov";
+                    break;
+                case "12":
+                    month = "dec";
+                    break;
+            }
+            return (parts[2] + "-" + month.toUpperCase() + "-" + parts[0]);
+        } else {
+            // Defaulting to the first of jan 2000
+            return "01-jan-2000";
+        }
+    }
 
     /**
      * Creates new form AddEmployee
@@ -356,7 +406,7 @@ public class UpdateDeleteEmployee extends javax.swing.JFrame {
             txtEname.setText(rs.getString("ename"));
             txtJob.setText(rs.getString("job"));
             cmbMgr.setSelectedItem(rs.getString("mgr"));
-            ftxtHiredate.setText(rs.getString("hiredate"));
+            ftxtHiredate.setText(dateF(rs.getString("hiredate")));
             txtSalary.setText(rs.getString("sal"));
             txtComm.setText(rs.getString("comm"));
             cmbDeptno.setSelectedItem(rs.getString("deptno"));
