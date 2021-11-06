@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class LoginForm extends javax.swing.JFrame {
 
     String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "USERNAME";
-    String DBPASS = "PASSWORD";
+    String DBUSER = "b00081542";
+    String DBPASS = "b00081542";
 
     boolean validLogin = false;
 
@@ -46,7 +46,7 @@ public class LoginForm extends javax.swing.JFrame {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             // populate valid mgr numbers 
             // Eyad - need to change this line and jButton1ActionPerformed() to match Lab 7 requirements
-            rs = statement.executeQuery("SELECT username, password, type FROM loginusers ORDER BY username ");
+            //rs = statement.executeQuery("SELECT username, password, type FROM loginusers ORDER BY username ");
 
         } catch (ClassNotFoundException | SQLException e) {
             javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Retreiving usename/password.");
@@ -150,6 +150,15 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
+            // Using inserted username and password to query the Users database
+            rs = statement.executeQuery(String.format("SELECT username, password, type FROM loginusers WHERE username = '%s' and password = '%s' ", txtUsername.getText().trim(), txtPassword.getText().trim()));
+            // Check if anything has been returned from query
+            if(rs.isBeforeFirst()){
+                validLogin = true;
+                (new Menu()).setVisible(true);
+                this.dispose();
+            }
+            /* Old code
             rs.beforeFirst();
             while (rs.next()) {
                 if (rs.getString("username").equals(txtUsername.getText().trim()) && rs.getString("password").equals(txtPassword.getText().trim())) {
@@ -159,7 +168,7 @@ public class LoginForm extends javax.swing.JFrame {
                     this.dispose();
                 }
             }
-
+            */
             if (!validLogin) {
                 javax.swing.JLabel label = new javax.swing.JLabel("Wrong username/password.");
                 label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
