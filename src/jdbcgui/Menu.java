@@ -5,11 +5,13 @@
  */
 package jdbcgui;
 
+import javax.swing.*;
+
 /**
  *
  * @author wissam
  */
-public class Menu extends javax.swing.JFrame {
+public class Menu extends JFrame {
 
     /**
      * Creates new form Menu
