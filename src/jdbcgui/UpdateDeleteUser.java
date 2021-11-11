@@ -476,23 +476,20 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 //            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             if (isValidData()) {
-                prepStatement = con.prepareStatement("UPDATE loginusers SET username = ?,  = ?, mgr = ?, hiredate = ?, sal = ?, comm = ?, deptno = ? WHERE empno = ?");
+                prepStatement = con.prepareStatement("UPDATE loginusers SET username = ?, password = ?, name = ?, type = ? WHERE username = ?");
 //                prepStatement.setInt(1, Integer.parseInt(txtEmpno.getText()));
-                prepStatement.setString(1, txtPassword1.getText().toUpperCase());
-                prepStatement.setString(2, txtJob.getText().toUpperCase());
-                prepStatement.setInt(3, Integer.parseInt(ddUserType.getSelectedItem().toString()));
-                prepStatement.setString(4, ftxtHiredate.getText());
-                prepStatement.setInt(5, Integer.parseInt(txtSalary.getText()));
-                prepStatement.setInt(6, Integer.parseInt(txtComm.getText()));
-                prepStatement.setInt(7, Integer.parseInt(cmbDeptno.getSelectedItem().toString()));
-                prepStatement.setInt(8, Integer.parseInt(txtName.getText().trim()));
+                prepStatement.setString(1, txtUsername.getText().toUpperCase());
+                prepStatement.setString(2, txtPassword1.getText().toUpperCase());
+                prepStatement.setString(3, txtName.getText().toUpperCase());
+                prepStatement.setInt(4, Integer.parseInt(ddUserType.getSelectedItem().toString()));
+                
                 // Using JOptionPane Confirm Dialog to confirm the action
                 int confirmAction = JOptionPane.showConfirmDialog(this,"Confirm update?");
                 if (confirmAction == JOptionPane.YES_OPTION){
                     int result = prepStatement.executeUpdate();
                     if (result > 0) {
 
-                        javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtName.getText() + " updated successfully.");
+                        javax.swing.JLabel label = new javax.swing.JLabel("User " + txtUsername.getText() + " updated successfully.");
                         label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
                         JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
 
@@ -514,7 +511,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(null, "Error updating employee." + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error updating user." + e.getMessage());
 
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
