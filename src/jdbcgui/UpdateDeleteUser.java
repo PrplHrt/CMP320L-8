@@ -41,6 +41,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         UserNameError.setVisible(false);
+        NameError.setVisible(false);
         PasswordCheck1Error.setVisible(false);
         PasswordCheck2Error.setVisible(false);
 
@@ -74,17 +75,14 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
             // populate mgr field
             rs = statement.executeQuery("SELECT username, name, type FROM loginusers ORDER BY name ASC ");
-            ddUserType.removeAllItems();
-            while (rs.next()) {
-                ddUserType.addItem(rs.getString("empno"));
-            }
+            
 
             // populate rest of fields
             rs.beforeFirst();
             rs.first();
             populateFields();
         } catch (SQLException e) {
-            javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Display selected empno.");
+            javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Display selected username.");
             label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -149,7 +147,6 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
             }
         });
 
-        txtName.setEditable(false);
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         btnNext.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -362,7 +359,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
         try {
             // make the result set scrolable forward/backward updatable
-            prepStatement = con.prepareStatement("DELETE emp WHERE empno = " + txtName.getText().trim());
+            prepStatement = con.prepareStatement("DELETE user WHERE username = " + txtName.getText().trim());
             // Using JOptionPane Confirm Dialog to confirm the action
             int confirmAction = JOptionPane.showConfirmDialog(this,String.format("Confirm delete of empno: %s?", txtName.getText().trim()));
             if (confirmAction == JOptionPane.YES_OPTION){
@@ -386,12 +383,13 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
     void clearErrorLabels() {
         UserNameError.setText("");
         UserNameError.setVisible(false);
+        NameError.setText("");
+        NameError.setVisible(false);
         PasswordCheck1Error.setText("");
         PasswordCheck1Error.setVisible(false);
         PasswordCheck2Error.setText("");
         PasswordCheck2Error.setVisible(false);
-        NameError.setText("");
-        NameError.setVisible(false);
+      
         
     }
 

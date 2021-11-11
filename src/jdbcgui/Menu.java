@@ -102,7 +102,6 @@ public class Menu extends JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Users");
-        jMenu3.setEnabled(false);
         jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
