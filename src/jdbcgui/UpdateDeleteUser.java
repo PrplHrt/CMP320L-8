@@ -68,9 +68,9 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         try {
             String str;
             // populate deptno field
-            ddUserType.removeAllItems();
-            ddUserType.addItem("0");
-            ddUserType.addItem("1");
+            cmbUserType.removeAllItems();
+            cmbUserType.addItem("0");
+            cmbUserType.addItem("1");
             
 
             // populate mgr field
@@ -114,7 +114,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         NameError = new javax.swing.JLabel();
-        ddUserType = new javax.swing.JComboBox<>();
+        cmbUserType = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -148,6 +148,11 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         });
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
 
         btnNext.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnNext.setText("Next >>");
@@ -167,14 +172,17 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
         UserNameError.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         UserNameError.setForeground(new java.awt.Color(255, 0, 0));
+        UserNameError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         UserNameError.setText("error label");
 
         PasswordCheck1Error.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         PasswordCheck1Error.setForeground(new java.awt.Color(255, 0, 0));
+        PasswordCheck1Error.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         PasswordCheck1Error.setText("error label");
 
         PasswordCheck2Error.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         PasswordCheck2Error.setForeground(new java.awt.Color(255, 0, 0));
+        PasswordCheck2Error.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         PasswordCheck2Error.setText("error label");
 
         txtPassword2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -190,9 +198,10 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
         NameError.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         NameError.setForeground(new java.awt.Color(255, 0, 0));
+        NameError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         NameError.setText("error label");
 
-        ddUserType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbUserType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Type:");
@@ -201,29 +210,32 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 77, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtName)
-                        .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PasswordCheck2Error, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PasswordCheck1Error, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserNameError, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NameError, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtName)
+                                        .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(UserNameError, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                            .addComponent(NameError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PasswordCheck1Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PasswordCheck2Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(btnPrevious)
@@ -240,7 +252,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
                         .addGap(200, 200, 200)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(ddUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -255,7 +267,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ddUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -289,7 +301,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
             txtUsername.setText(rs.getString("username"));
             txtName.setText(rs.getString("name"));
             //txtPassword1.setText(rs.getString("ename"));
-            ddUserType.setSelectedItem(rs.getString("type"));
+            cmbUserType.setSelectedItem(rs.getString("type"));
             
            
             EnableDisableButtons();
@@ -359,13 +371,13 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
         try {
             // make the result set scrolable forward/backward updatable
-            prepStatement = con.prepareStatement("DELETE user WHERE username = " + txtName.getText().trim());
+            prepStatement = con.prepareStatement("DELETE loginusers WHERE username = '" + txtUsername.getText().trim() +"'");
             // Using JOptionPane Confirm Dialog to confirm the action
-            int confirmAction = JOptionPane.showConfirmDialog(this,String.format("Confirm delete of empno: %s?", txtName.getText().trim()));
+            int confirmAction = JOptionPane.showConfirmDialog(this,String.format("Confirm delete of user: %s?", txtUsername.getText().trim()));
             if (confirmAction == JOptionPane.YES_OPTION){
                 int result = prepStatement.executeUpdate();
                 if (result > 0) {
-                    javax.swing.JLabel label = new javax.swing.JLabel("Employee No " + txtName.getText().trim() + " deleted successfully.");
+                    javax.swing.JLabel label = new javax.swing.JLabel("User " + txtUsername.getText().trim() + " deleted successfully.");
                     label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
                     JOptionPane.showMessageDialog(null, label, "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                     getNewData();
@@ -374,7 +386,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
             prepStatement.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error adding new employee.");
+            JOptionPane.showMessageDialog(null, "Error Deleting User.");
 
         }
 
@@ -449,16 +461,14 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
             result = false;
         }
         
-        if (txtPassword1.getText().trim().isEmpty() || (txtPassword1.getText().trim().length() > 10) || txtPassword1.getText().trim() != txtPassword2.getText().trim()) {
-            if (txtPassword1.getText().trim().isEmpty()) {
-                PasswordCheck1Error.setText("Invalid. Cannot be empty.");
-            } else if ((txtPassword1.getText().trim().length() > 10)) {
-                PasswordCheck1Error.setText("Invalid. Must be < 10 chars.");
-            } else if (txtPassword1.getText().trim() != txtPassword2.getText().trim()){
-                 PasswordCheck1Error.setText("Invalid. Passwords Do Not Match.");
+        if (txtPassword2.getText().trim().isEmpty() || !txtPassword1.getText().trim().equals(txtPassword2.getText().trim())) {
+            if (txtPassword2.getText().trim().isEmpty()) {
+                PasswordCheck2Error.setText("Invalid. Cannot be empty.");
+            }  else if (!txtPassword1.getText().trim().equals(txtPassword2.getText().trim())){
+                 PasswordCheck2Error.setText("Invalid. Passwords Do Not Match.");
             }
 
-            PasswordCheck1Error.setVisible(true);
+            PasswordCheck2Error.setVisible(true);
             result = false;
         }
 
@@ -475,11 +485,14 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
             if (isValidData()) {
                 prepStatement = con.prepareStatement("UPDATE loginusers SET username = ?, password = ?, name = ?, type = ? WHERE username = ?");
-//                prepStatement.setInt(1, Integer.parseInt(txtEmpno.getText()));
-                prepStatement.setString(1, txtUsername.getText().toUpperCase());
-                prepStatement.setString(2, txtPassword1.getText().toUpperCase());
-                prepStatement.setString(3, txtName.getText().toUpperCase());
-                prepStatement.setInt(4, Integer.parseInt(ddUserType.getSelectedItem().toString()));
+                prepStatement.setString(1, txtUsername.getText());
+                
+                //encryption:
+                
+                
+                prepStatement.setString(2, txtPassword1.getText());
+                prepStatement.setString(3, txtName.getText());
+                prepStatement.setInt(4, Integer.parseInt(cmbUserType.getSelectedItem().toString()));
                 
                 // Using JOptionPane Confirm Dialog to confirm the action
                 int confirmAction = JOptionPane.showConfirmDialog(this,"Confirm update?");
@@ -514,6 +527,10 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel NameError;
@@ -524,7 +541,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> ddUserType;
+    private javax.swing.JComboBox<String> cmbUserType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

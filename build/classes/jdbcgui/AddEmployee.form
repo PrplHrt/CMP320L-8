@@ -44,31 +44,28 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnAddNewEmp" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtEname" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="txtJob" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtComm" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="txtSalary" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cmbMgr" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbDeptno" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ftxtHiredate" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblEnameError" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="lblJobError" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblHiredateError" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblSalaryError" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblCommError" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                          <Component id="txtEmpno" pref="200" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnAddNewEmp" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtEname" alignment="0" pref="200" max="32767" attributes="0"/>
+                              <Component id="txtJob" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtComm" alignment="0" pref="200" max="32767" attributes="0"/>
+                              <Component id="txtSalary" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cmbMgr" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbDeptno" min="-2" max="-2" attributes="0"/>
+                              <Component id="ftxtHiredate" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtEmpno" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblEmpnoError" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblEnameError" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="lblJobError" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblHiredateError" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblSalaryError" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblCommError" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="lblEmpnoError" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -149,7 +146,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="EMPNO:"/>
+        <Property name="text" type="java.lang.String" value="Username:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -157,7 +154,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="ENAME:"/>
+        <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
