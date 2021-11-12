@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,6 +37,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+       
         this.setLocationRelativeTo(null);
 
         try {
@@ -54,6 +57,20 @@ public class LoginForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+    
+    
+    public static String encryptMessage(String message) throws Exception{
+          
+        String encodingKey = "knb5bKDAEIdzXrmi+EAyM+A5Ykkfk6w7";
+        SecretKeySpec skeySpec = new SecretKeySpec(encodingKey.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+        byte[] messageB = message.getBytes();
+        byte[] encryptedMessage = cipher.doFinal(messageB);
+        
+        return new String(encryptedMessage);
+   
     }
 
     /**
@@ -156,7 +173,11 @@ public class LoginForm extends javax.swing.JFrame {
 
         try {
             // Using inserted username and password to query the Users database
-            rs = statement.executeQuery(String.format("SELECT username, password, type FROM loginusers WHERE username = '%s' and password = '%s' ", txtUsername.getText().trim(), txtPassword.getText().trim()));
+            
+            //encrypting the entered password and comparing to database
+           
+            String password = encryptMessage(txtPassword.getText().trim());
+            rs = statement.executeQuery(String.format("SELECT username, password, type FROM loginusers WHERE username = '%s' and password = '%s' ", txtUsername.getText().trim(), password));
             // Check if anything has been returned from query
             if(rs.isBeforeFirst()){
                 validLogin = true;
@@ -187,6 +208,7 @@ public class LoginForm extends javax.swing.JFrame {
             label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        catch(Exception e){System.out.print(e);}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed

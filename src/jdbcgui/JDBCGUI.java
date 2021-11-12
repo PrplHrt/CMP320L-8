@@ -10,7 +10,7 @@ package jdbcgui;
  * @author wissam
  */
 public class JDBCGUI {
-
+   
     /**
      * @param args the command line arguments
      */

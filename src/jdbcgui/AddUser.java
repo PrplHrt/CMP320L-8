@@ -8,7 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
+import static jdbcgui.UpdateDeleteUser.encryptMessage;
 
 
 /*
@@ -66,6 +69,20 @@ public class AddUser extends javax.swing.JFrame {
             System.out.println(e);
         }
 
+    }
+    
+    
+    public static String encryptMessage(String message) throws Exception{
+          
+        String encodingKey = "knb5bKDAEIdzXrmi+EAyM+A5Ykkfk6w7";
+        SecretKeySpec skeySpec = new SecretKeySpec(encodingKey.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+        byte[] messageB = message.getBytes();
+        byte[] encryptedMessage = cipher.doFinal(messageB);
+        
+        return new String(encryptedMessage);
+   
     }
 
     /**
@@ -352,8 +369,8 @@ public class AddUser extends javax.swing.JFrame {
                 prepStatement.setString(2, txtName.getText());
                 
                 //encryption
-                
-                prepStatement.setString(3, jPasswordField1.getText());
+                String password = encryptMessage(jPasswordField1.getText().trim());
+                prepStatement.setString(3, password);
                 prepStatement.setInt(4, Integer.parseInt(cmbType.getSelectedItem().toString()));
                 int result = prepStatement.executeUpdate();
                 if (result > 0) {
@@ -380,7 +397,7 @@ public class AddUser extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error adding new employee.");
-        }
+        }catch(Exception e){System.out.print(e);}
     }//GEN-LAST:event_btnAddNewEmpActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed

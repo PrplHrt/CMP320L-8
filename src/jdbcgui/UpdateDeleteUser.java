@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
+import static jdbcgui.LoginForm.encryptMessage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -62,6 +65,19 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         }
 
     }
+    
+     public static String encryptMessage(String message) throws Exception{
+          
+        String encodingKey = "knb5bKDAEIdzXrmi+EAyM+A5Ykkfk6w7";
+        SecretKeySpec skeySpec = new SecretKeySpec(encodingKey.getBytes(), "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+        byte[] messageB = message.getBytes();
+        byte[] encryptedMessage = cipher.doFinal(messageB);
+        
+        return new String(encryptedMessage);
+   
+    }
 
     private void getNewData() {
 
@@ -73,7 +89,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
             cmbUserType.addItem("1");
             
 
-            // populate mgr field
+            // will not populate the password field as passwords are confidential to each user and not for admins to see 
             rs = statement.executeQuery("SELECT username, name, type FROM loginusers ORDER BY name ASC ");
             
 
@@ -488,9 +504,9 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
                 prepStatement.setString(1, txtUsername.getText());
                 
                 //encryption:
+                String password = encryptMessage(txtPassword1.getText().trim());
                 
-                
-                prepStatement.setString(2, txtPassword1.getText());
+                prepStatement.setString(2, password);
                 prepStatement.setString(3, txtName.getText());
                 prepStatement.setInt(4, Integer.parseInt(cmbUserType.getSelectedItem().toString()));
                 
@@ -525,6 +541,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error updating user." + e.getMessage());
 
         }
+         catch(Exception e){System.out.print(e);}
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
