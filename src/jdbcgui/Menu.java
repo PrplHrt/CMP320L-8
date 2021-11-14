@@ -20,6 +20,9 @@ public class Menu extends JFrame {
     public Menu(LoginUser user, myDBCon con) {
         initComponents();
         this.con = con;
+        if(user.getType() == 1){
+            this.jMenu3.setEnabled(false);
+        }
         this.setLocationRelativeTo(null);
     }
 

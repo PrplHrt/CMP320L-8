@@ -36,5 +36,4 @@ public class myDBCon {
     public Connection getCon(){
         return this.con;
     }
-    
 }

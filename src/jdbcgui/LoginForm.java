@@ -162,11 +162,12 @@ public class LoginForm extends javax.swing.JFrame {
             //encrypting the entered password and comparing to database
            
             String password = encryptMessage(txtPassword.getText().trim());
-            rs = statement.executeQuery(String.format("SELECT username, password, type FROM loginusers WHERE username = '%s' and password = '%s' ", txtUsername.getText().trim(), password));
+            rs = statement.executeQuery(String.format("SELECT username, password, name, type FROM loginusers WHERE username = '%s' and password = '%s' ", txtUsername.getText().trim(), password));
             // Check if anything has been returned from query
             if(rs.isBeforeFirst()){
                 validLogin = true;
-                (new Menu(new LoginUser(rs.getString("Username"), rs.getString("Name"), rs.getInt("Type")), con)).setVisible(true);
+                rs.next();
+                (new Menu(new LoginUser(rs.getString(1), rs.getString("name"), rs.getInt("type")), con)).setVisible(true);
                 this.dispose();
             }
             
