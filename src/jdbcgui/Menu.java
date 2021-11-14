@@ -16,8 +16,10 @@ public class Menu extends JFrame {
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    private myDBCon con;
+    public Menu(LoginUser user, myDBCon con) {
         initComponents();
+        this.con = con;
         this.setLocationRelativeTo(null);
     }
 
@@ -178,12 +180,12 @@ public class Menu extends JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        (new AddEmployee()).setVisible(true);
+        (new AddEmployee(con)).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        (new UpdateDeleteEmployee()).setVisible(true);
+        (new UpdateDeleteEmployee(con)).setVisible(true);
 
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -200,23 +202,23 @@ public class Menu extends JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
       //add new user
-      (new AddUser()).setVisible(true);
+      (new AddUser(con)).setVisible(true);
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // update/delete user
-         (new UpdateDeleteUser()).setVisible(true);
+         (new UpdateDeleteUser(con)).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here: add dept
-        (new AddDept()).setVisible(true);
+        (new AddDept(con)).setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:  update del
-        (new UpdateDeleteDept()).setVisible(true);
+        (new UpdateDeleteDept(con)).setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
 

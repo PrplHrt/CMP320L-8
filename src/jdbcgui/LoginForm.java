@@ -5,12 +5,12 @@
  */
 package jdbcgui;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
@@ -20,14 +20,9 @@ import javax.swing.JOptionPane;
  * @author wissam
  */
 public class LoginForm extends javax.swing.JFrame {
-
-    String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00081542";
-    String DBPASS = "b00081542";
-
     boolean validLogin = false;
 
-    Connection con;
+    myDBCon con;
     Statement statement;
     PreparedStatement prepStatement;
     ResultSet rs;
@@ -39,24 +34,14 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
        
         this.setLocationRelativeTo(null);
-
+        // Creating the DB Connection object
+        con = new myDBCon();
         try {
-            // Load Oracle JDBC Driver
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            // Connect to Oracle Database
-            con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             // make the result set scrolable forward/backward updatable
-            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            // populate valid mgr numbers 
-            // Eyad - need to change this line and jButton1ActionPerformed() to match Lab 7 requirements
-            //rs = statement.executeQuery("SELECT username, password, type FROM loginusers ORDER BY username ");
-
-        } catch (ClassNotFoundException | SQLException e) {
-            javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Retreiving usename/password.");
-            label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
-            JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
+            statement = con.getCon().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     
@@ -181,20 +166,10 @@ public class LoginForm extends javax.swing.JFrame {
             // Check if anything has been returned from query
             if(rs.isBeforeFirst()){
                 validLogin = true;
-                (new Menu()).setVisible(true);
+                (new Menu(new LoginUser(rs.getString("Username"), rs.getString("Name"), rs.getInt("Type")), con)).setVisible(true);
                 this.dispose();
             }
-            /* Old code
-            rs.beforeFirst();
-            while (rs.next()) {
-                if (rs.getString("username").equals(txtUsername.getText().trim()) && rs.getString("password").equals(txtPassword.getText().trim())) {
-
-                    validLogin = true;
-                    (new Menu()).setVisible(true);
-                    this.dispose();
-                }
-            }
-            */
+            
             if (!validLogin) {
                 javax.swing.JLabel label = new javax.swing.JLabel("Wrong username/password.");
                 label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));

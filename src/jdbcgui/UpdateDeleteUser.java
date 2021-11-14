@@ -24,10 +24,6 @@ import static jdbcgui.LoginForm.encryptMessage;
  */
 public class UpdateDeleteUser extends javax.swing.JFrame {
 
-    String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00081542";
-    String DBPASS = "b00081542";
-
     Connection con;
     Statement statement;
     Statement statement2;
@@ -39,8 +35,9 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
     /**
      * Creates new form AddUser
      */
-    public UpdateDeleteUser() {
+    public UpdateDeleteUser(myDBCon connect) {
         initComponents();
+        con = connect.getCon();
         this.setLocationRelativeTo(null);
 
         UserNameError.setVisible(false);
@@ -50,15 +47,10 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
 
        
         try {
-            // Load Oracle JDBC Driver
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            // Connect to Oracle Database
-            con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             // make the result set scrolable forward/backward updatable
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//            statement2 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             getNewData();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch ( SQLException e) {
             javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Connection error.");
             label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);

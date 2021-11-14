@@ -27,37 +27,21 @@ public class AddDept extends javax.swing.JFrame {
     /**
      * Creates new form AddDept
      */
-    String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00081542";
-    String DBPASS = "b00081542";
 
     Connection con;
     Statement statement;
     PreparedStatement prepStatement;
     ResultSet rs;
 
-    public AddDept() {
+    public AddDept(myDBCon connect) {
         initComponents();
+        con = connect.getCon();
         // center form in screen 
         this.setLocationRelativeTo(null);
         // set all error labels to invisible
         lbllDeptnoError.setVisible(false);
         lblDnameError.setVisible(false);
         lblLocError.setVisible(false);
-
-        //populate mgr and deptno combo boxes 
-        try {
-            // Load Oracle JDBC Driver
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            // Connect to Oracle Database
-            con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-//            // make the result set scrolable forward/backward updatable
-//            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//           
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
-        }
-
     }
 
     /**

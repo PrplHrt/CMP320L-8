@@ -25,17 +25,14 @@ public class AddEmployee extends javax.swing.JFrame {
     /**
      * Creates new form AddEmployee
      */
-    String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00081542";
-    String DBPASS = "b00081542";
-
     Connection con;
     Statement statement;
     PreparedStatement prepStatement;
     ResultSet rs;
 
-    public AddEmployee() {
+    public AddEmployee(myDBCon connect) {
         initComponents();
+        con = connect.getCon();
         // center form in screen 
         this.setLocationRelativeTo(null);
         // set all error labels to invisible
@@ -48,15 +45,10 @@ public class AddEmployee extends javax.swing.JFrame {
 
         //populate mgr and deptno combo boxes 
         try {
-            // Load Oracle JDBC Driver
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            // Connect to Oracle Database
-            con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             // make the result set scrolable forward/backward updatable
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             // populate valid mgr numbers 
             rs = statement.executeQuery("SELECT empno FROM emp ORDER BY empno ASC");
-
             // populate mgr combo box
             while (rs.next()) {
                 cmbMgr.addItem(rs.getString("empno"));
@@ -70,7 +62,7 @@ public class AddEmployee extends javax.swing.JFrame {
 
             rs.close();
             statement.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 

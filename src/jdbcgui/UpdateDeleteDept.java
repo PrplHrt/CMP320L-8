@@ -21,9 +21,6 @@ import javax.swing.JOptionPane;
  */
 public class UpdateDeleteDept extends javax.swing.JFrame {
 
-    String DBURL = "jdbc:oracle:thin:@coeoracle.aus.edu:1521:orcl";
-    String DBUSER = "b00081542";
-    String DBPASS = "b00081542";
 
     Connection con;
     Statement statement;
@@ -36,8 +33,9 @@ public class UpdateDeleteDept extends javax.swing.JFrame {
     /**
      * Creates new form AddDepartment
      */
-    public UpdateDeleteDept() {
+    public UpdateDeleteDept(myDBCon connect) {
         initComponents();
+        con = connect.getCon();
         this.setLocationRelativeTo(null);
 
         lblDeptnoError.setVisible(false);
@@ -46,15 +44,10 @@ public class UpdateDeleteDept extends javax.swing.JFrame {
 
         //populate mgr and deptno combo boxes 
         try {
-            // Load Oracle JDBC Driver
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            // Connect to Oracle Database
-            con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-            // make the result set scrolable forward/backward updatable
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 //            statement2 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             getNewData();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Connection error.");
             label.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
             JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.ERROR_MESSAGE);
