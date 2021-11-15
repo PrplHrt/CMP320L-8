@@ -152,15 +152,12 @@ public class LoginForm extends javax.swing.JFrame {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
-
+//help me
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         try {
             // Using inserted username and password to query the Users database
-            
             //encrypting the entered password and comparing to database
-           
             String password = encryptMessage(txtPassword.getText().trim());
             rs = statement.executeQuery(String.format("SELECT username, password, name, type FROM loginusers WHERE username = '%s' and password = '%s' ", txtUsername.getText().trim(), password));
             // Check if anything has been returned from query

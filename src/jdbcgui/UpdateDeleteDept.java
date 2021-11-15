@@ -45,7 +45,7 @@ public class UpdateDeleteDept extends javax.swing.JFrame {
         //populate mgr and deptno combo boxes 
         try {
             statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//            statement2 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            statement2 = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             getNewData();
         } catch (SQLException e) {
             javax.swing.JLabel label = new javax.swing.JLabel("SQL Error - Connection error.");
@@ -313,12 +313,12 @@ public class UpdateDeleteDept extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            rs = statement.executeQuery("Select * from emp where deptno = " + txtDeptno.getText().trim());
-            if (rs.isBeforeFirst()) {
+            ResultSet empls = statement2.executeQuery("Select * from emp where deptno = " + txtDeptno.getText().trim());
+            if (empls.isBeforeFirst()) {
                 JOptionPane.showMessageDialog(null, "Error: Department contains Employees.");
                 return;
             }
-
+            
             // make the result set scrolable forward/backward updatable
             prepStatement = con.prepareStatement("DELETE dept WHERE deptno = " + txtDeptno.getText().trim());
             // Using JOptionPane Confirm Dialog to confirm the action
