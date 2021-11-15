@@ -1,7 +1,6 @@
 package jdbcgui;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -379,6 +378,17 @@ public class UpdateDeleteDept extends javax.swing.JFrame {
             }
             lblDeptnoError.setVisible(true);
             result = false;
+        }else {
+            try {
+                rs = statement.executeQuery(String.format("Select Deptno from dept where deptno = %d", Integer.parseInt(txtDeptno.getText().trim())));
+                if (rs.isBeforeFirst()) {
+                    lblDeptnoError.setText("Invalid. Deptno already exists.");
+                    lblDeptnoError.setVisible(true);
+                    result = false;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AddDept.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (txtDname.getText().trim().isEmpty() || (txtDname.getText().trim().length() > 10)) {

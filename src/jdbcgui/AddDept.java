@@ -215,7 +215,7 @@ public class AddDept extends javax.swing.JFrame {
             result = false;
         } else {
             try {
-                rs = statement.executeQuery("Select Deptno from dept where deptno equals " + txtDeptno.getText().trim());
+                rs = statement.executeQuery(String.format("Select Deptno from dept where deptno = %d", Integer.parseInt(txtDeptno.getText().trim())));
                 if (rs.isBeforeFirst()) {
                     lbllDeptnoError.setText("Invalid. Deptno already exists.");
                     lbllDeptnoError.setVisible(true);
