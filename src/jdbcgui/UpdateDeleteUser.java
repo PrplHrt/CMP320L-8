@@ -138,6 +138,11 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
         jLabel3.setText("Password:");
 
         txtPassword1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPassword1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassword1ActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnUpdate.setText("Update");
@@ -501,7 +506,7 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
                 prepStatement.setString(2, password);
                 prepStatement.setString(3, txtName.getText());
                 prepStatement.setInt(4, Integer.parseInt(cmbUserType.getSelectedItem().toString()));
-                
+                prepStatement.setString(5, txtUsername.getText());
                 // Using JOptionPane Confirm Dialog to confirm the action
                 int confirmAction = JOptionPane.showConfirmDialog(this,"Confirm update?");
                 if (confirmAction == JOptionPane.YES_OPTION){
@@ -539,6 +544,10 @@ public class UpdateDeleteUser extends javax.swing.JFrame {
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
+
+    private void txtPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassword1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassword1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
